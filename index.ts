@@ -1,6 +1,10 @@
-import { FmBucket } from "./resources/bucket";
+import { FmFrontend } from "./services/frontend";
 
-new FmBucket({
-    Name: "example",
-    Product: "devops-course",
-});
+function main() {
+    new FmFrontend({
+        Name: "example",
+        Product: "devops-course",
+    });
+}
+
+main();
