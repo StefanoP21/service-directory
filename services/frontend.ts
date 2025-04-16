@@ -16,17 +16,18 @@ export class FmFrontend extends pulumi.ComponentResource {
 
         super("pkg:index:FmFrontend", resourceName, {}, opts);
 
-        const source = new FmBucket(
+        new FmBucket(
             {
                 Name: args.Name,
                 Product: args.Product,
+                Public: true,
             },
             {
                 parent: this,
             }
         );
 
-        const replica = new FmBucket(
+        new FmBucket(
             {
                 Name: `${args.Name}-replica`,
                 Product: args.Product,
