@@ -25,27 +25,23 @@ export class FmBucket extends pulumi.ComponentResource {
             bucket: bucketName,
             acl: aws.s3.CannedAcl.Private,
             tags: {
-                Name: bucketName,
                 Environment: stack,
             },
         };
 
         if (args.Public) {
-            bucketArgs = {
-                ...bucketArgs,
-                acl: aws.s3.CannedAcl.PublicRead,
-                website: {
-                    indexDocument: "index.html",
-                    errorDocument: "error.html",
-                    routingRules: `[{
+            bucketArgs.acl = aws.s3.CannedAcl.PublicRead;
+            bucketArgs.website = {
+                indexDocument: "index.html",
+                errorDocument: "error.html",
+                routingRules: `[{
                         "Condition": {
                             "KeyPrefixEquals": "docs/"
                         },
                         "Redirect": {
                             "ReplaceKeyPrefixWith": "documents/"
                         }
-                    }]`,
-                },
+                }]`,
             };
         }
 
